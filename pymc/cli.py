@@ -86,5 +86,5 @@ def build() -> None:
                 for variable in classes[classname]:
                     if variable[0] == '_':
                         classfile.write(f'\n\tdef get{ (str(variable).replace("_", "").capitalize()) }(self):\n')
-                        classfile.write(f'\t\t return self.{variable}\n')
+                        classfile.write(f'\t\treturn self.{variable}\n')
                   

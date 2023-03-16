@@ -1,3 +1,7 @@
-ClassName:
-  _var1: null
-  _var2: null
+PrimeiraClasse:
+  _var1:
+  _var2: 
+  var3: 
+
+SegundaClasse:
+  var: 

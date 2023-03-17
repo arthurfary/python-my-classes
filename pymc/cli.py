@@ -4,6 +4,7 @@ import typer
 import yaml
 import os 
 
+from pymc.Writer import Writer
 
 from pymc import __app_name__, __version__
 
@@ -68,23 +69,13 @@ def build() -> None:
     """
     Creates class files from the pymc.yaml preset
     """
-    with open('./pymc.yaml', 'r') as file:
-        classes = yaml.safe_load(file)
-
-    for classname in classes:
-
-        filename = classname + '.py'
-
-        if not os.path.exists(filename):
-            with open(filename, 'w') as classfile:
-                classfile.write('class ' + classname + ':\n\n')
-                classfile.write('\tdef __init__(self):\n\n')
-
-                for variable in classes[classname]:
-                    classfile.write(f'\t\tself.{variable} = {classes[classname][variable]}\n')
-
-                for variable in classes[classname]:
-                    if variable[0] == '_':
-                        classfile.write(f'\n\tdef get{ (str(variable).replace("_", "").capitalize()) }(self):\n')
-                        classfile.write(f'\t\treturn self.{variable}\n')
-                  
+    try:
+        with open('./pymc.yaml', 'r') as file:
+            classes = yaml.safe_load(file)
+        
+        writer = Writer(classes)
+        writer.write()
+        
+    except Exception as e:
+        typer.echo(e)
+        raise typer.Exit(code=1)

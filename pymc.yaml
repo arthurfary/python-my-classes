@@ -1,7 +1,10 @@
-PrimeiraClasse:
-  _var1:
-  _var2: 
-  var3: 
+ClassName:
+  _var1: null
+  _var2: null
 
-SegundaClasse:
-  var: 
+folder<MyOtherClassName:
+  _var1: null
+  var2: null
+
+folder<insidefolder<OtherOtherClass:
+  _var:

@@ -3,6 +3,7 @@ from typing import Optional
 import typer
 import yaml
 import os 
+import logging
 
 from pymc.Writer import Writer
 
@@ -43,26 +44,28 @@ def init(
     Creates pymc.yaml file
     """
 
-    if not os.path.exists('pymc.yaml') or overwrite:
+    preset_file = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'preset.yaml')
+    pymc_file = 'pymc.yaml'
+
+    if not os.path.exists(pymc_file) or overwrite:
         try:
-            with open(os.path.join(dir_path, 'preset.yaml'), 'r') as preset:
+            with open(preset_file, 'r') as preset:
                 preset = yaml.safe_load(preset)
-        except:
-            typer.echo('Failed reading from preset.')
+        except FileNotFoundError as e:
+            logger.error(f"Failed reading from preset: {e}")
             raise typer.Exit(code=1)
 
         try:
-            with open('pymc.yaml', 'w') as file:
-                # boiler-plate code
+            with open(pymc_file, 'w') as file:
                 yaml.dump(preset, file)
-            
-            typer.echo('pymc file created.')
-        except:
-            typer.echo('Failed creating pymc.yaml')
+                typer.echo('pymc file created.')
+        except OSError as e:
+            logger.error(f"Failed creating pymc.yaml: {e}")
             raise typer.Exit(code=1)
     else:
         typer.echo('pymc file already exists (use -o to overwrite)')
         raise typer.Exit(code=1)
+
 
 @app.command()
 def build() -> None:

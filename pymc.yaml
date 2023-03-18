@@ -2,9 +2,9 @@ ClassName:
   _var1: null
   _var2: null
 
-folder<MyOtherClassName:
+funcoes<MyOtherClassName:
   _var1: null
   var2: null
 
-folder<insidefolder<OtherOtherClass:
+funcoes<insidefolder<OtherOtherClass:
   _var:

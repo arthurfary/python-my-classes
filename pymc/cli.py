@@ -77,5 +77,6 @@ def build() -> None:
         writer.write()
         
     except Exception as e:
-        typer.echo(e)
+        # VV descomentar VV se quiser que apareça o erro 
+        # typer.echo(e) 
         raise typer.Exit(code=1)

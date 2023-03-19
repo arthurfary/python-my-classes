@@ -2,9 +2,7 @@ ClassName:
   _var1: null
   _var2: null
 
-funcoes<MyOtherClassName:
-  _var1: null
-  var2: null
-
-funcoes<insidefolder<OtherOtherClass:
-  _var:
+vasco<Flamengo:
+  _selecao:
+  _isTeam:
+  __dataDoJogo:

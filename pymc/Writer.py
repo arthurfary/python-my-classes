@@ -30,13 +30,22 @@ class Writer:
     def _create_class_file(self, fclassname, variables, folders, filename):
         with open(os.path.join(folders, filename), 'w') as classfile:
             classfile.write(f'class {fclassname}:\n\n')
-            classfile.write('\tdef __init__(self):\n\n')
+            classfile.write('\tdef __init__(self):\n')
 
             for variable, value in variables.items():
                 classfile.write(f'\t\tself.{variable} = {value}\n')
 
             for variable, value in variables.items():
                 if variable.startswith('_'):
-                    method_name = f'get{variable[1:].capitalize()}'
-                    classfile.write(f'\n\tdef {method_name}(self):\n')
+                    method_name = variable.replace("_", "")
+                    method_name = method_name[0].upper() + method_name[1:]
+
+                    classfile.write(f'\n\tdef get{method_name}(self):\n')
                     classfile.write(f'\t\treturn self.{variable}\n')
+                    
+                    classfile.write(f'\n\tdef set{method_name}(self, value):\n')
+                    classfile.write(f'\t\tself.{variable} = value\n')
+
+    
+                    
+                

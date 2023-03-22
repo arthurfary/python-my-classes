@@ -52,7 +52,7 @@ def init(
             with open(preset_file, 'r') as preset:
                 preset = yaml.safe_load(preset)
         except FileNotFoundError as e:
-            logger.error(f"Failed reading from preset: {e}")
+            logging.error(f"Failed reading from preset: {e}")
             raise typer.Exit(code=1)
 
         try:
@@ -60,11 +60,11 @@ def init(
                 yaml.dump(preset, file)
                 typer.echo('pymc file created.')
         except OSError as e:
-            logger.error(f"Failed creating pymc.yaml: {e}")
+            logging.error(f"Failed creating pymc.yaml: {e}")
             raise typer.Exit(code=1)
     else:
         typer.echo('pymc file already exists (use -o to overwrite)')
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=0)
 
 
 @app.command()
@@ -78,8 +78,10 @@ def build() -> None:
         
         writer = Writer(classes)
         writer.write()
+
+        typer.echo("Class files created!")
+
         
     except Exception as e:
-        # VV descomentar VV se quiser que apareça o erro 
-        # typer.echo(e) 
+        logging.error(f"Failed creating pymc.yaml: {e}")
         raise typer.Exit(code=1)

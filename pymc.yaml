@@ -2,7 +2,6 @@ ClassName:
   _var1: null
   _var2: null
 
-vasco<Flamengo:
-  _selecao:
-  _isTeam:
-  __dataDoJogo:
+folder<AnotherClass:
+  _foo: null
+  _bar: null

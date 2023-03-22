@@ -13,3 +13,6 @@ def test_init():
     result = runner.invoke(cli.app, ['init'])
     assert result.exit_code == 0
     
+def test_build():
+    result = runner.invoke(cli.app, ['build'])
+    assert result.exit_code == 0

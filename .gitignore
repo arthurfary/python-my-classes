@@ -1,1 +1,3 @@
 /.pytest_cache
+pymc/__pycache__
+dist/
